@@ -13564,7 +13564,8 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Y-dash?-Eso-que-plotly-me-quiere-vender-todo-el-tiempo?">Y dash? Eso que plotly me quiere vender todo el tiempo?<a class="anchor-link" href="#Y-dash?-Eso-que-plotly-me-quiere-vender-todo-el-tiempo?">&#182;</a></h2>
+<h2 id="Y-dash?-Eso-que-plotly-me-quiere-vender-todo-el-tiempo?">Y dash? Eso que plotly me quiere vender todo el tiempo?<a class="anchor-link" href="#Y-dash?-Eso-que-plotly-me-quiere-vender-todo-el-tiempo?">&#182;</a></h2><p><a href="https://plotly.com/dash/">https://plotly.com/dash/</a></p>
+
 </div>
 </div>
 </div></div></section></section><section><section>
@@ -13642,13 +13643,16 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Widgets">Widgets<a class="anchor-link" href="#Widgets">&#182;</a></h2><p>When you’ve got the data or model into the state that you want to explore, you can add in widgets like st.slider(), st.button() or st.selectbox(). It’s really straightforward — treat widgets as variables:</p>
+<h2 id="Widgets">Widgets<a class="anchor-link" href="#Widgets">&#182;</a></h2><p>Los widgets son objetos que sirve para que el usuario interactue con los datos o el modelo, hay una extensa lista:</p>
+<p><a href="https://docs.streamlit.io/en/stable/api.html">https://docs.streamlit.io/en/stable/api.html</a></p>
+<p>Ejemplo:</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>  <span class="c1"># 👈 this is a widget</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>  <span class="c1"># 👈 widget</span>
 <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;squared is&#39;</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
-<p>On first run, the app above should output the text “0 squared is 0”. Then every time a user interacts with a widget, Streamlit simply reruns your script from top to bottom, assigning the current state of the widget to your variable in the process.</p>
-<p>For example, if the user moves the slider to position 10, Streamlit will rerun the code above and set x to 10 accordingly. So now you should see the text “10 squared is 100”.</p>
+<p>En este ejmeplo la app tira un output “0 squared is 0”. Cada vez que el usuario interactua , Streamlit vuelve a ejecutar el script entero, asignando el nuevo valor a la variable asociadad al widget. Si fuera 10, Streamlit corre el codigo y daria como output “10 squared is 100”.</p>
+<h2 id="Componentes">Componentes<a class="anchor-link" href="#Componentes">&#182;</a></h2><p>Extienden la funcionalidad de Streamlit.</p>
+<p><a href="https://www.streamlit.io/components">https://www.streamlit.io/components</a></p>
 
 </div>
 </div>
