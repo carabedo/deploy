@@ -13203,12 +13203,11 @@ a.anchor-link {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Flask:">Flask:<a class="anchor-link" href="#Flask:">&#182;</a></h1><p>Nos permite apificar nuestro modelo, en realidad cualquier script de python. Podemos enviar un GET requests a algun puerto de nuestra computadora. Ese requests puede contener los parametros que luego el script va usar.</p>
-<p>En este ejemplo, una simple app que imprime el cuadrado de la variable 'a' si es que existe:</p>
+<p>En este ejemplo, una simple app que imprime el cuadrado de la variable 'a' si es que existe. Para que funcione deben guardar el siguiente codigo en un archivo 'prueba.py' y correrlo en la consola <code>python prueba.py</code>:</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="s1">&#39;Servidor Get&#39;</span><span class="p">)</span>
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
-
 <span class="k">def</span> <span class="nf">hola</span><span class="p">():</span>
 
     <span class="c1"># obtengo los datos del request get.</span>
@@ -13315,20 +13314,21 @@ POST is one of the most common HTTP methods.</code></pre>
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span> <span class="k">as</span> <span class="nn">req</span>
 <span class="kn">import</span> <span class="nn">json</span>
 
 <span class="c1"># parametros, la url y un diccionario</span>
+<span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://127.0.0.1:5001/&#39;</span> <span class="c1"># &lt;--- url por default en servidor</span>
+<span class="n">url2</span><span class="o">=</span><span class="s1">&#39;http://deploy.myftp.org:5002/&#39;</span> <span class="c1"># &lt;--- url publica de mi ec2</span>
 
-<span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://127.0.0.1:5001/&#39;</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;-2&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;13&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;10&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">]</span> <span class="p">,</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;-2&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;13&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;10&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">]</span> <span class="p">,</span>
           <span class="s1">&#39;b&#39;</span> <span class="p">:</span> <span class="mi">2342</span> <span class="p">}</span>
 
 <span class="c1"># el requests</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url2</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
 <span class="n">r</span>
 </pre></div>
 
@@ -13342,7 +13342,7 @@ POST is one of the most common HTTP methods.</code></pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[42]:</div>
+    <div class="prompt output_prompt">Out[21]:</div>
 
 
 
@@ -13359,7 +13359,7 @@ POST is one of the most common HTTP methods.</code></pre>
 </div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
@@ -13375,7 +13375,7 @@ POST is one of the most common HTTP methods.</code></pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[43]:</div>
+    <div class="prompt output_prompt">Out[22]:</div>
 
 
 
@@ -13392,7 +13392,7 @@ POST is one of the most common HTTP methods.</code></pre>
 </div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span>
@@ -13408,7 +13408,7 @@ POST is one of the most common HTTP methods.</code></pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[38]:</div>
+    <div class="prompt output_prompt">Out[23]:</div>
 
 
 
@@ -13425,7 +13425,7 @@ POST is one of the most common HTTP methods.</code></pre>
 </div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;response&#39;</span><span class="p">])</span>
@@ -13441,7 +13441,7 @@ POST is one of the most common HTTP methods.</code></pre>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[44]:</div>
+    <div class="prompt output_prompt">Out[24]:</div>
 
 
 
@@ -13501,12 +13501,10 @@ POST is one of the most common HTTP methods.</code></pre>
 </div>
 </div>
 </div></section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">bokeh.embed</span> <span class="kn">import</span> <span class="n">components</span>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bokeh.embed</span> <span class="kn">import</span> <span class="n">components</span>
 <span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span>
 <span class="kn">from</span> <span class="nn">bokeh.resources</span> <span class="kn">import</span> <span class="n">INLINE</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">render_template</span>
@@ -13539,13 +13537,11 @@ POST is one of the most common HTTP methods.</code></pre>
         <span class="n">css_resources</span><span class="o">=</span><span class="n">css_resources</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span>
-<span class="c1"># app.run(host=&#39;0.0.0.0&#39;,  port=5002)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span>  <span class="n">port</span><span class="o">=</span><span class="mi">5002</span><span class="p">)</span>
 </pre></div>
 
-    </div>
 </div>
 </div>
-
 </div></section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13556,6 +13552,7 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 <li><a href="http://127.0.0.1:5002/?a=2&amp;b=10&amp;n=1000">http://127.0.0.1:5002/?a=2&amp;b=10&amp;n=1000</a></li>
 <li><a href="http://127.0.0.1:5002/?a=2&amp;b=50&amp;n=1000">http://127.0.0.1:5002/?a=2&amp;b=50&amp;n=1000</a></li>
 <li><a href="http://127.0.0.1:5002/?a=2&amp;b=80&amp;n=10000">http://127.0.0.1:5002/?a=2&amp;b=80&amp;n=10000</a></li>
+<li><a href="http://deploy.myftp.org:5002/?a=2&amp;b=80&amp;n=10000">http://deploy.myftp.org:5002/?a=2&amp;b=80&amp;n=10000</a></li>
 </ul>
 
 </div>
@@ -13706,36 +13703,14 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 </div>
 </div>
 </div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>streamlit run bokeh_st.py
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>^C
-</pre>
-</div>
-</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="http://3.138.190.237:8501/">http://3.138.190.237:8501/</a></p>
+<p><a href="http://deploy.myftp.org:8501">http://deploy.myftp.org:8501</a></p>
 
 </div>
 </div>
-
 </div></div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13801,6 +13776,8 @@ create_config.sh
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>problema: <a href="https://www.pami.org.ar/centros-vacunacion">https://www.pami.org.ar/centros-vacunacion</a></p>
+<p>solucion:</p>
 <p>Repo <a href="https://github.com/carabedo/geopami">https://github.com/carabedo/geopami</a></p>
 <p>App <a href="https://geopami.herokuapp.com/">https://geopami.herokuapp.com/</a></p>
 
