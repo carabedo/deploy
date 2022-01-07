@@ -14576,31 +14576,25 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 <p><img src="3.png" alt=""></p>
 
 </div>
-</div></section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Heroku">Heroku<a class="anchor-link" href="#Heroku">&#182;</a></h3><ul>
-<li><p>Gratis, sin tarjeta de credito a diferencia de AWS</p>
-</li>
-<li><p>Se integra muy bien con GITHUB</p>
-</li>
-</ul>
-<p>Una vez que tenemos nuestra app de streamlit funcionando en nuestra compu, creamos un repo en github y subimos el ".py" con nuestra app y 3 archivos mas:</p>
-<div class="highlight"><pre><span></span>app_st.py
-requirements.txt
-runtime.txt
-Procfile
-create_config.sh
-</pre></div>
+<p><img src="7.png" alt=""></p>
 
 </div>
-</div></section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="4.png" alt=""></p>
+<p><img src="8.png" alt=""></p>
 
 </div>
-</div></section><section>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="9.png" alt=""></p>
+
+</div>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="5.png" style="width: 500px;"/></p>
@@ -14618,7 +14612,13 @@ create_config.sh
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Virtual-Machines">Virtual Machines<a class="anchor-link" href="#Virtual-Machines">&#182;</a></h2><p>Ejemplo en oracle:</p>
-<p>Creamos una instancia <a href="https://cloud.oracle.com/compute/instances?region=sa-vinhedo-1">aca</a></p>
+<p>Creamos una vm <a href="https://cloud.oracle.com/compute/instances?region=sa-vinhedo-1">aca</a></p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="como-controlamos-la-vm?">como controlamos la vm?<a class="anchor-link" href="#como-controlamos-la-vm?">&#182;</a></h1><p><img src="https://i.giphy.com/media/YQitE4YNQNahy/giphy.webp" alt=""></p>
 
 </div>
 </div></section></section><section><section>
@@ -14646,6 +14646,20 @@ create_config.sh
     vim prueba.py</code></pre>
 <p>Ejecutemos nuestro script:</p>
 <p><code>python3 prueba.py</code></p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Subiendo-archivos">Subiendo archivos<a class="anchor-link" href="#Subiendo-archivos">&#182;</a></h3><p>Desde una consola local usamos el programita scp (secure copy):</p>
+<p><code>scp -i key.pem -r /path/local/files root@:0.0.0.0:/path/on/my/server</code></p>
+<p>Necitamos la ip publica del servidor, en nuestro caso quedaria asi:</p>
+<p><code>scp -i sshtest.key  ./server_bokeh.py opc@193.123.101.232:/home/opc/prueba</code></p>
+<p>Esto subiria el archivo <code>server_bokeh.py</code> a la maquina virtual a una carpeta llamada <code>prueba</code>. Solo funciona si ejecuto el comando en la misma carpeta donde se encuentra dicho archivo y la llave.</p>
+<h3 id="Subiendo-carpetas">Subiendo carpetas<a class="anchor-link" href="#Subiendo-carpetas">&#182;</a></h3><ul>
+<li>-r recursivamente la carpeta templates</li>
+</ul>
+<p><code>scp -i sshtest.key  -r ./templates/ opc@193.123.101.232:/home/opc/prueba</code></p>
 
 </div>
 </div></section></section><section><section>
