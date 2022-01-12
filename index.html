@@ -14104,11 +14104,24 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="The-GET-Method">The GET Method<a class="anchor-link" href="#The-GET-Method">&#182;</a></h3><p><strong>GET is used to request data from a specified resource.</strong></p>
-<p>GET is one of the most common HTTP methods.</p>
-<p>Note that the query string (name/value pairs) is sent in the URL of a GET request:</p>
-<blockquote><p>/test/demo_form.php?name1=value1&amp;name2=value2</p>
+<p><img src="https://carabedo.github.io/apis/http.png" alt=""></p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Flask:">Flask:<a class="anchor-link" href="#Flask:">&#182;</a></h1><p>Nos permite 'apificar' nuestro modelo, en realidad cualquier script de python.</p>
+<p>Podemos enviar un GET requests a algun puerto de nuestra computadora.</p>
+<p>Ese requests puede contener los parametros que luego el script va usar.</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="GET-Method">GET Method<a class="anchor-link" href="#GET-Method">&#182;</a></h3><p>GET es el metodo HTTP mas comun, habran notado que navegando por la internet los siguiente:</p>
+<blockquote><p>www.ejemplo.com/demo_form.php?name1=value1&amp;name2=value2</p>
 </blockquote>
+<p>En la URL del request estan los parametros del pedido.</p>
 <ul>
 <li>GET requests can be cached</li>
 <li>GET requests remain in the browser history</li>
@@ -14122,27 +14135,30 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Flask:">Flask:<a class="anchor-link" href="#Flask:">&#182;</a></h1><p>Nos permite apificar nuestro modelo, en realidad cualquier script de python. Podemos enviar un GET requests a algun puerto de nuestra computadora. Ese requests puede contener los parametros que luego el script va usar.</p>
-<p>En este ejemplo, una simple app que imprime el cuadrado de la variable 'a' si es que existe. Para que funcione deben guardar el siguiente codigo en un archivo 'prueba.py' y correrlo en la consola <code>python prueba.py</code>:</p>
+<p>En este es una simple app que imprime el cuadrado de la variable input 'a':</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="s1">&#39;Servidor Get&#39;</span><span class="p">)</span>
-<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
-
-<span class="k">def</span> <span class="nf">hola</span><span class="p">():</span>
-    <span class="c1"># obtengo los datos del request que viene de la peticion </span>
-    <span class="c1"># externa (el metodo get_json lo transforma en un diccionario)</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-    <span class="k">try</span><span class="p">:</span>            
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="s1">&#39;Servidor Get&#39;</span><span class="p">)</span> <span class="c1">#nombre de la app</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span> <span class="c1">#metodo http que va a usar</span>
+<span class="k">def</span> <span class="nf">funcionprincipal</span><span class="p">():</span><span class="c1">#no importa el nombre el decorador se encarga</span>
+    <span class="c1"># obtengo los datos del request que viene de la peticion externa </span>
+    <span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="c1"># (el metodo to_dict lo transforma en un diccionario)</span>
+    <span class="k">try</span><span class="p">:</span><span class="c1"># uso try por si no me envian una variable a           </span>
         <span class="n">resp</span><span class="o">=</span><span class="s1">&#39;el cuadrado de a es : &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">])</span><span class="o">*</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]))</span>
     <span class="k">except</span><span class="p">:</span>
         <span class="n">resp</span><span class="o">=</span><span class="s1">&#39;no se envio la variable a&#39;</span>
     <span class="k">return</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
-
-<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span>  <span class="n">port</span><span class="o">=</span><span class="mi">5002</span> <span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span>  <span class="n">port</span><span class="o">=</span><span class="mi">5002</span> <span class="p">)</span><span class="c1"># host local puerto el que quieras</span>
 </pre></div>
 
 </div>
-</div></section><section>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Para que funcione debemos guardar el codigo en un archivo 'prueba.py'</p>
+<p>y luego correrlo en la consola <code>python prueba.py</code>.</p>
+
+</div>
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
@@ -14150,58 +14166,83 @@ div.jp-OutputPrompt {
 </li>
 <li><p><a href="http://127.0.0.1:5002/?a=4&amp;b=&#39;asdfasf">http://127.0.0.1:5002/?a=4&amp;b=&#39;asdfasf</a>'</p>
 </li>
-<li><p><a href="http://deploy.myftp.org:5002/?c=4&amp;b=&#39;asdfasf">http://deploy.myftp.org:5002/?c=4&amp;b=&#39;asdfasf</a>'</p>
+<li><p><a href="http://127.0.0.1:5002/?c=4&amp;b=&#39;asdfasf">http://127.0.0.1:5002/?c=4&amp;b=&#39;asdfasf</a>'</p>
 </li>
 </ul>
 <p>Y si quisiera pasarle un vector?</p>
 <ul>
-<li><a href="http://127.0.0.1:5002/?c=4&amp;a=[&#39;1&#39;,&#39;12">http://127.0.0.1:5002/?c=4&amp;a=[&#39;1&#39;,&#39;12</a>']</li>
+<li><a href="http://127.0.0.1:5002/?a=[&#39;1&#39;,&#39;12">http://127.0.0.1:5002/?a=[&#39;1&#39;,&#39;12</a>']</li>
 </ul>
 
 </div>
-</div></section><section>
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="The-POST-Method">The POST Method<a class="anchor-link" href="#The-POST-Method">&#182;</a></h3><p><strong>POST is used to send data to a server to create/update a resource.</strong></p>
-<blockquote><p>The data sent to the server with POST is stored in the request body of the HTTP request:</p>
+<h3 id="POST-Method">POST Method<a class="anchor-link" href="#POST-Method">&#182;</a></h3><p><strong>el metodo POST se usa para enviar informacion al servidor para crear o actualizar algun recurso.</strong></p>
+<blockquote><p>en esta caso la  data enviada al servidor con POST viaja en el cuerpo del request:</p>
 </blockquote>
 
 <pre><code>POST /test/demo_form.php HTTP/1.1
 Host: w3schools.com
 name1=value1&amp;name2=value2
 POST is one of the most common HTTP methods.</code></pre>
-<p>Some other notes on POST requests:</p>
 <ul>
 <li>POST requests are never cached</li>
 <li>POST requests do not remain in the browser history</li>
 <li>POST requests cannot be bookmarked</li>
 <li>POST requests have no restrictions on data length</li>
+<li>Los requests POST no se pueden hacer desde un navegador</li>
 </ul>
 
 </div>
+</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="s1">&#39;server post&#39;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span> <span class="c1">#aca definimos q recibe requests POST</span>
+<span class="k">def</span> <span class="nf">predict</span><span class="p">():</span> <span class="c1">#la funcion q se ejecuta </span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">a_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+        <span class="c1"># Le damos forma de un diccionario para poder hacer el traspaso a json trivialmente</span>
+        <span class="n">a_2</span><span class="o">=</span><span class="n">a_vector</span><span class="o">**</span><span class="mi">2</span>    
+        <span class="n">resp</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;response&#39;</span> <span class="p">:</span> <span class="n">a_2</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="p">}</span><span class="c1">#importante pasar a lista los numpy arrays </span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">resp</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;response&#39;</span> <span class="p">:</span> <span class="s1">&#39;no esta presente la variable a&#39;</span><span class="p">}</span>
+        <span class="c1"># en esta linea, transformamos el diccionario en json con jsonify (funcionalidad de flask)</span>
+        <span class="c1"># este json es incorporado en el cuerpo de la respuesta</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">5001</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Queremos pasar la variable 'a' como un vector, con el metodo POST es muy sencillo.</p>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[44]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span> <span class="k">as</span> <span class="nn">req</span>
 <span class="kn">import</span> <span class="nn">json</span>
-
 <span class="c1"># parametros, la url y un diccionario</span>
 <span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://127.0.0.1:5001/&#39;</span> <span class="c1"># &lt;--- url por default en servidor</span>
-
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;-2&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;13&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;10&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">]</span> <span class="p">,</span>
-          <span class="s1">&#39;b&#39;</span> <span class="p">:</span> <span class="mi">2342</span> <span class="p">}</span>
-
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;-2&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;13&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="s1">&#39;10&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="s1">&#39;b&#39;</span> <span class="p">:</span> <span class="mi">2342</span> <span class="p">}</span>
 <span class="c1"># el requests</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url2</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 <span class="n">r</span>
 </pre></div>
 
@@ -14210,10 +14251,33 @@ POST is one of the most common HTTP methods.</code></pre>
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[44]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>&lt;Response [200]&gt;</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[45]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
@@ -14232,7 +14296,7 @@ POST is one of the most common HTTP methods.</code></pre>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[22]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[45]:</div>
 
 
 
@@ -14250,7 +14314,7 @@ POST is one of the most common HTTP methods.</code></pre>
 </div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[46]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;response&#39;</span><span class="p">]</span>
@@ -14269,7 +14333,7 @@ POST is one of the most common HTTP methods.</code></pre>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[23]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[46]:</div>
 
 
 
@@ -14287,7 +14351,7 @@ POST is one of the most common HTTP methods.</code></pre>
 </div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[47]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;response&#39;</span><span class="p">])</span>
@@ -14306,7 +14370,7 @@ POST is one of the most common HTTP methods.</code></pre>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[24]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[47]:</div>
 
 
 
@@ -14321,36 +14385,25 @@ POST is one of the most common HTTP methods.</code></pre>
 
 </div>
 
-</div></div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[158]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="s1">&#39;Predictor de examenes&#39;</span><span class="p">)</span>
-<span class="c1">#aclaramos la ruta del recurso y el tipo: (podriamos poner /modelos/listener)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="s1">&#39;Nombre&#39;</span><span class="p">)</span>
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
-<span class="c1">#solo con esta linea, ya tenemos un recurso recibiendo requests en &quot;127.0.0.1/&quot;.</span>
-
 <span class="c1">#defino la funcion que manejarara el request</span>
 <span class="k">def</span> <span class="nf">predict</span><span class="p">():</span>
     <span class="c1"># obtengo los datos del request post</span>
-    <span class="c1"># que viene de la peticion externa (el metodo get_json lo transforma en un diccionario)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">a_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
-        <span class="c1"># Le damos forma de un diccionario para poder hacer el traspaso a json trivialmente</span>
-        <span class="n">a_2</span><span class="o">=</span><span class="n">a_vector</span><span class="o">**</span><span class="mi">2</span>
-        <span class="c1">#importante pasar a lista los numpy arrays     </span>
-        <span class="n">resp</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;response&#39;</span> <span class="p">:</span> <span class="n">a_2</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="p">}</span>
-    <span class="k">except</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;no mandaron a&#39;</span><span class="p">)</span>
-        <span class="n">resp</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;response&#39;</span> <span class="p">:</span> <span class="s1">&#39;no esta presente la variable a&#39;</span><span class="p">}</span>
-       
-        <span class="c1"># en esta linea, transformamos el diccionario en json con jsonify (funcionalidad de flask)</span>
-        <span class="c1"># este json es incorporado en el cuerpo de la respuesta</span>
+    <span class="c1">###</span>
+    <span class="c1">### cositas lindas</span>
+    <span class="c1">###</span>
     <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">5001</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14361,68 +14414,107 @@ POST is one of the most common HTTP methods.</code></pre>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Debugeando">Debugeando<a class="anchor-link" href="#Debugeando">&#182;</a></h1><p>Este modo nos permite que la app se ejecute nuevamente cada vez que el archivo <code>miapp.py</code> sea modificado. Nos permite poder ir cambiando el codigo si es que algo no funciona bien, ayuda poner algunos <code>print</code> en el codigo lo que se vera en la consola donde este corriendo la app.</p>
+
+</div>
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[158]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="s1">&#39;Nombre&#39;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">predict</span><span class="p">():</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">5001</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Ok...-algo-un-poco-mas-interactivo,-no-hay?">Ok... algo un poco mas interactivo, no hay?<a class="anchor-link" href="#Ok...-algo-un-poco-mas-interactivo,-no-hay?">&#182;</a></h1>
 </div>
 </div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Esta app de Flask genera un servidor de Bokeh, con el cual podemos interactuar!
-Es un ploteo de una funcion trigonometrica definida segun:</p>
-$$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
-<li><a href="http://127.0.0.1:5002/?a=2&amp;b=10&amp;n=1000">http://127.0.0.1:5002/?a=2&amp;b=10&amp;n=1000</a></li>
-<li><a href="http://127.0.0.1:5002/?a=2&amp;b=50&amp;n=1000">http://127.0.0.1:5002/?a=2&amp;b=50&amp;n=1000</a></li>
-<li><a href="http://127.0.0.1:5002/?a=2&amp;b=80&amp;n=10000">http://127.0.0.1:5002/?a=2&amp;b=80&amp;n=10000</a></li>
-<li><a href="http://deploy.myftp.org:5002/?a=2&amp;b=80&amp;n=10000">http://deploy.myftp.org:5002/?a=2&amp;b=80&amp;n=10000</a></li>
+<p>Esta app de Flask genera una pagina con un grafico de Plotly con el cual podemos interactuar!
+Vamos a armar un grafico con los datos de contagios de covid-19 para diferentes paises. Usamos requests GET asi el usuario puede mandar la informacion del pais del cual quiere ver los datos en la URL</p>
+<p>Local:</p>
+<ul>
+<li><a href="http://127.0.0.1:5000/?paises=[&#39;AR&#39;,&#39;FR&#39;,&#39;ES&#39;]&amp;tipo=&#39;muertes_100k">http://127.0.0.1:5000/?paises=[&#39;AR&#39;,&#39;FR&#39;,&#39;ES&#39;]&amp;tipo=&#39;muertes_100k</a>'</li>
+<li><a href="http://127.0.0.1:5000/?paises=[&#39;AR&#39;,&#39;FR&#39;,&#39;ES&#39;]&amp;tipo=&#39;casos_100k">http://127.0.0.1:5000/?paises=[&#39;AR&#39;,&#39;FR&#39;,&#39;ES&#39;]&amp;tipo=&#39;casos_100k</a>'</li>
 </ul>
+<p>Externo:</p>
+<ul>
+<li><a href="http://127.0.0.1:5000/?paises=[&#39;AR&#39;,&#39;FR&#39;,&#39;ES&#39;]&amp;tipo=&#39;muertes_100k">http://127.0.0.1:5000/?paises=[&#39;AR&#39;,&#39;FR&#39;,&#39;ES&#39;]&amp;tipo=&#39;muertes_100k</a>'</li>
+</ul>
+<p><a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2</a></p>
 
 </div>
 </div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bokeh.embed</span> <span class="kn">import</span> <span class="n">components</span>
-<span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span>
-<span class="kn">from</span> <span class="nn">bokeh.resources</span> <span class="kn">import</span> <span class="n">INLINE</span>
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">render_template</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">plotly</span>
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">import</span> <span class="nn">requests</span> <span class="k">as</span> <span class="nn">req</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">Range1d</span>
-
-<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="s1">&#39;Ejemplo Bokeh&#39;</span><span class="p">)</span>
-<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">bokeh</span><span class="p">():</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
-    <span class="n">a</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">])</span>
-    <span class="n">b</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">])</span>
-    <span class="n">n</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">])</span>
-    <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">y</span><span class="o">=</span><span class="n">a</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">plot_width</span><span class="o">=</span><span class="mi">1280</span><span class="p">,</span> <span class="n">plot_height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-    <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">x_range</span><span class="o">=</span><span class="n">Range1d</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">y_range</span><span class="o">=</span><span class="n">Range1d</span><span class="p">(</span><span class="n">bottom</span><span class="p">,</span> <span class="n">top</span><span class="p">)</span>
-    <span class="c1"># magia html del bokeh</span>
-    <span class="n">js_resources</span> <span class="o">=</span> <span class="n">INLINE</span><span class="o">.</span><span class="n">render_js</span><span class="p">()</span>
-    <span class="n">css_resources</span> <span class="o">=</span> <span class="n">INLINE</span><span class="o">.</span><span class="n">render_css</span><span class="p">()</span>
-    <span class="n">script</span><span class="p">,</span> <span class="n">div</span> <span class="o">=</span> <span class="n">components</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-    <span class="n">html</span> <span class="o">=</span> <span class="n">render_template</span><span class="p">(</span>
-        <span class="s1">&#39;index.html&#39;</span><span class="p">,</span>
-        <span class="n">plot_script</span><span class="o">=</span><span class="n">script</span><span class="p">,</span>
-        <span class="n">plot_div</span><span class="o">=</span><span class="n">div</span><span class="p">,</span>
-        <span class="n">js_resources</span><span class="o">=</span><span class="n">js_resources</span><span class="p">,</span>
-        <span class="n">css_resources</span><span class="o">=</span><span class="n">css_resources</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span>
-<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span>  <span class="n">port</span><span class="o">=</span><span class="mi">5002</span><span class="p">)</span>
 </pre></div>
 
 </div>
-</div><div class="fragment">
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Y-dash?-Eso-que-plotly-me-quiere-vender-todo-el-tiempo?">Y dash? Eso que plotly me quiere vender todo el tiempo?<a class="anchor-link" href="#Y-dash?-Eso-que-plotly-me-quiere-vender-todo-el-tiempo?">&#182;</a></h2><p><a href="https://plotly.com/dash/">https://plotly.com/dash/</a></p>
+<div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">notdash</span><span class="p">():</span>
+    <span class="n">params</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+    <span class="n">paises</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;paises&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">))</span>
+    <span class="n">tipo</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;tipo&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">))</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">tipo</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">pais</span> <span class="ow">in</span> <span class="n">paises</span><span class="p">:</span>
+        <span class="n">r</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://corona-api.com/countries/&#39;</span> <span class="o">+</span> <span class="n">pais</span><span class="p">)</span>
+        <span class="n">t</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">casos</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">muertes</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;timeline&#39;</span><span class="p">]:</span>
+                <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">day</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+                <span class="n">casos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">day</span><span class="p">[</span><span class="s1">&#39;new_confirmed&#39;</span><span class="p">])</span>
+                <span class="n">muertes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">day</span><span class="p">[</span><span class="s1">&#39;new_deaths&#39;</span><span class="p">])</span>
+        <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;casos&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">casos</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;muertes&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">muertes</span>
+        <span class="n">pop</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;population&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">100000</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;casos_100k&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">casos</span><span class="p">)</span><span class="o">/</span><span class="n">pop</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;muertes_100k&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">muertes</span><span class="p">)</span><span class="o">/</span><span class="n">pop</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">add_scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">tipo</span><span class="p">],</span><span class="n">name</span><span class="o">=</span><span class="n">pais</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers+lines&#39;</span><span class="p">)</span> 
+    <span class="n">graphJSON</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">plotly</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">PlotlyJSONEncoder</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;notdash.html&#39;</span><span class="p">,</span> <span class="n">graphJSON</span><span class="o">=</span><span class="n">graphJSON</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
 
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Y-dash?-Eso-que-plotly-me-quiere-vender-todo-el-tiempo?">Y dash? Eso que plotly me quiere vender todo el tiempo?<a class="anchor-link" href="#Y-dash?-Eso-que-plotly-me-quiere-vender-todo-el-tiempo?">&#182;</a></h2><p><a href="https://dash.gallery/Portal/?search=[ML">https://dash.gallery/Portal/?search=[ML</a>]</p>
+<p><img src="https://images.prismic.io/plotly-marketing-website/e9302a4a-b71c-4061-b28b-f69a6ecbb041_Dash_autonomous.gif" alt=""></p>
+
+</div>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Streamlit">Streamlit<a class="anchor-link" href="#Streamlit">&#182;</a></h1><ul>
@@ -14433,6 +14525,12 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 <li><p>Todos los elementos de una página web son definidos en un <strong>script de python</strong>. Cada uno será definido por una función y a medida que los agregamos podemos ver su resultado en una página de nuestro navegador.</p>
 </li>
 </ul>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="https://raw.githubusercontent.com/streamlit/docs/main/public/images/Streamlit_overview.gif" alt=""></p>
 
 </div>
 </div></section><section>
@@ -14485,7 +14583,7 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 </div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Widgets">Widgets<a class="anchor-link" href="#Widgets">&#182;</a></h2><p>Los widgets son objetos que sirve para que el usuario interactue con los datos o el modelo, hay una extensa lista:</p>
+<h2 id="widgets">widgets<a class="anchor-link" href="#widgets">&#182;</a></h2><p>Los widgets son objetos que sirve para que el usuario interactue con los datos o el modelo, hay una extensa lista:</p>
 <p><a href="https://docs.streamlit.io/en/stable/api.html">https://docs.streamlit.io/en/stable/api.html</a></p>
 <p>Ejemplo:</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
@@ -14493,7 +14591,7 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 <span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;squared is&#39;</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
 </pre></div>
 <p>En este ejmeplo la app tira un output “0 squared is 0”. Cada vez que el usuario interactua , Streamlit vuelve a ejecutar el script entero, asignando el nuevo valor a la variable asociadad al widget. Si fuera 10, Streamlit corre el codigo y daria como output “10 squared is 100”.</p>
-<h2 id="Componentes">Componentes<a class="anchor-link" href="#Componentes">&#182;</a></h2><p>Extienden la funcionalidad de Streamlit.</p>
+<h2 id="componentes">componentes<a class="anchor-link" href="#componentes">&#182;</a></h2><p>widgets developeados por la comunidad que extienden la funcionalidad de Streamlit.</p>
 <p><a href="https://www.streamlit.io/components">https://www.streamlit.io/components</a></p>
 
 </div>
@@ -14503,34 +14601,49 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">streamlit</span> <span class="k">as</span> <span class="nn">st</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span>
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">import</span> <span class="nn">requests</span> <span class="k">as</span> <span class="nn">req</span>
 
-<span class="c1"># widget de latex</span>
-<span class="n">st</span><span class="o">.</span><span class="n">latex</span><span class="p">(</span><span class="s1">&#39;f(x) = a\sin( \omega  x)&#39;</span><span class="p">)</span>
+<span class="n">paises</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">multiselect</span><span class="p">(</span>
+     <span class="s1">&#39;Paises a visualizar:&#39;</span><span class="p">,</span>
+     <span class="p">[</span><span class="s1">&#39;AR&#39;</span><span class="p">,</span> <span class="s1">&#39;BR&#39;</span><span class="p">,</span> <span class="s1">&#39;CH&#39;</span><span class="p">,</span> <span class="s1">&#39;UY&#39;</span><span class="p">,</span><span class="s1">&#39;BO&#39;</span><span class="p">])</span>
 
-<span class="c1"># widget input numerica</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">number_input</span><span class="p">(</span><span class="s1">&#39;Insert a&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># texto</span>
-<span class="n">st</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;a = &#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">option</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">selectbox</span><span class="p">(</span>
+     <span class="s1">&#39;Que datos desea visualizar?&#39;</span><span class="p">,</span>
+     <span class="p">(</span><span class="s1">&#39;casos_100k&#39;</span><span class="p">,</span><span class="s1">&#39;muertes_100k&#39;</span><span class="p">))</span>
 
-<span class="c1">#widget de sliders</span>
-<span class="n">b</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">n</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">slider</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span> 
+<span class="n">tipo</span><span class="o">=</span><span class="n">option</span>
+</pre></div>
 
-<span class="c1"># python </span>
-<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-<span class="n">y</span><span class="o">=</span><span class="n">a</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span>
-     <span class="n">title</span><span class="o">=</span><span class="s1">&#39;plot&#39;</span><span class="p">,</span>
-     <span class="n">x_axis_label</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span>
-     <span class="n">y_axis_label</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">legend_label</span><span class="o">=</span><span class="s1">&#39;sin(x)&#39;</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">p</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">legend_label</span><span class="o">=</span><span class="s1">&#39;sin(x)&#39;</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="c1">#widget de bokeh</span>
-<span class="n">st</span><span class="o">.</span><span class="n">bokeh_chart</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">use_container_width</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">st</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="s1">&#39;plot&#39;</span><span class="p">):</span>
+     <span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">tipo</span><span class="p">)</span>
+     <span class="k">for</span> <span class="n">pais</span> <span class="ow">in</span> <span class="n">paises</span><span class="p">:</span>
+          <span class="n">r</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;http://corona-api.com/countries/&#39;</span> <span class="o">+</span> <span class="n">pais</span><span class="p">)</span>
+          <span class="n">t</span><span class="o">=</span><span class="p">[]</span>
+          <span class="n">casos</span><span class="o">=</span><span class="p">[]</span>
+          <span class="n">muertes</span><span class="o">=</span><span class="p">[]</span>
+          <span class="n">data</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+          <span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;timeline&#39;</span><span class="p">]:</span>
+                    <span class="n">t</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">day</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+                    <span class="n">casos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">day</span><span class="p">[</span><span class="s1">&#39;new_confirmed&#39;</span><span class="p">])</span>
+                    <span class="n">muertes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">day</span><span class="p">[</span><span class="s1">&#39;new_deaths&#39;</span><span class="p">])</span>
+          <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+          <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+          <span class="n">df</span><span class="p">[</span><span class="s1">&#39;casos&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">casos</span>
+          <span class="n">df</span><span class="p">[</span><span class="s1">&#39;muertes&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">muertes</span>
+          <span class="n">pop</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;population&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">100000</span>
+          <span class="n">df</span><span class="p">[</span><span class="s1">&#39;casos_100k&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">casos</span><span class="p">)</span><span class="o">/</span><span class="n">pop</span>
+          <span class="n">df</span><span class="p">[</span><span class="s1">&#39;muertes_100k&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">muertes</span><span class="p">)</span><span class="o">/</span><span class="n">pop</span>
+          <span class="n">fig</span><span class="o">.</span><span class="n">add_scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">tipo</span><span class="p">],</span><span class="n">name</span><span class="o">=</span><span class="n">pais</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers+lines&#39;</span><span class="p">)</span> 
+      <span class="n">st</span><span class="o">.</span><span class="n">plotly_chart</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+     <span class="k">pass</span>
 </pre></div>
 
 </div>
@@ -14545,11 +14658,10 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><a href="http://3.138.190.237:8501/">http://3.138.190.237:8501/</a></p>
-<p><a href="http://deploy.myftp.org:8501">http://deploy.myftp.org:8501</a></p>
+<p><a href="http://192.168.0.18:8501">http://192.168.0.18:8501</a></p>
 
 </div>
-</div></div><div class="fragment">
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Muy-bonito!-pero-como-se-lo-muestro-al-cliente/jefa/mivieja?">Muy bonito! pero como se lo muestro al cliente/jefa/mivieja?<a class="anchor-link" href="#Muy-bonito!-pero-como-se-lo-muestro-al-cliente/jefa/mivieja?">&#182;</a></h3><ul>
@@ -14564,7 +14676,7 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 </ul>
 
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Cloud-computing">Cloud computing<a class="anchor-link" href="#Cloud-computing">&#182;</a></h1><p><img src="2.png" alt=""></p>
@@ -14665,13 +14777,13 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="ssh-con-visualcode">ssh con visualcode<a class="anchor-link" href="#ssh-con-visualcode">&#182;</a></h2><p><img src="https://code.visualstudio.com/assets/docs/remote/ssh-tutorial/remote-ssh-extension.png" alt=""></p>
+<h2 id="ssh-con-visualcode">ssh con visualcode<a class="anchor-link" href="#ssh-con-visualcode">&#182;</a></h2><p><img src='https://code.visualstudio.com/assets/docs/remote/ssh-tutorial/remote-ssh-extension.png' width='500' /></p>
 
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="https://code.visualstudio.com/assets/docs/remote/ssh-tutorial/remote-commands.png" alt=""></p>
+<p><img src='https://code.visualstudio.com/assets/docs/remote/ssh-tutorial/remote-commands.png' width='500' /></p>
 
 </div>
 </div></section></section><section><section>
@@ -14689,8 +14801,45 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="bokeh-en-una-vm">bokeh en una vm<a class="anchor-link" href="#bokeh-en-una-vm">&#182;</a></h1><p>levantemos un servidor de bokeh en nuestra vm</p>
+<h3 id="Instalamos-conda:">Instalamos conda:<a class="anchor-link" href="#Instalamos-conda:">&#182;</a></h3><p>es una VM vacia, necesitamos instalar todas las librerias que vamos a usar</p>
+<p><code>wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh</code></p>
+<p><code>sh Miniconda3-latest-Linux-x86_64.sh</code></p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="flask-en-una-vm">flask en una vm<a class="anchor-link" href="#flask-en-una-vm">&#182;</a></h1><ul>
+<li>levantemos un servidor de flask en nuestra vm, guardamos el codigo en <code>app.py</code>.</li>
+</ul>
+<p><code>flask run --host=0.0.0.0</code></p>
+<ul>
+<li>abrimos el puerto donde esta flask:</li>
+</ul>
+<p><code>sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 5000 -j ACCEPT</code></p>
+<ul>
+<li>agregamos una <code>Ingress Rules</code> en la <code>Security List</code> de la subnet asociada a nuestra VM desde la pagina de oracle.</li>
+</ul>
 <p>ahora nuestra 'app' es accesible desde cualquier maquina</p>
+<ul>
+<li><a href="http://193.123.110.190:5002/?a=4">http://193.123.110.190:5002/?a=4</a></li>
+</ul>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="flask+plotly-en-una-vm">flask+plotly en una vm<a class="anchor-link" href="#flask+plotly-en-una-vm">&#182;</a></h1><ul>
+<li>levantemos un servidor de flask+plotly en nuestra vm.</li>
+</ul>
+<p><code>flask run --host=0.0.0.0</code></p>
+<ul>
+<li>solo podemos tener una app por puerto </li>
+</ul>
+<p>ahora nuestra 'app' es accesible desde cualquier maquina</p>
+<ul>
+<li><a href="http://193.123.110.190:5000/?paises=[&#39;AR&#39;,&#39;FR&#39;,&#39;ES&#39;]&amp;tipo=&#39;muertes_100k">http://193.123.110.190:5000/?paises=[&#39;AR&#39;,&#39;FR&#39;,&#39;ES&#39;]&amp;tipo=&#39;muertes_100k</a>'</li>
+</ul>
 
 </div>
 </div></section></section><section><section>
@@ -14721,10 +14870,11 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 </div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[151]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[50]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">tolist</span><span class="p">()}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">tolist</span><span class="p">()}</span>
 <span class="n">respuesta</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;https://6xpc1u0n12.execute-api.us-east-2.amazonaws.com/default/test2&#39;</span><span class="p">,</span><span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 <span class="n">respuesta</span>
 </pre></div>
@@ -14742,7 +14892,7 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[151]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[50]:</div>
 
 
 
@@ -14760,7 +14910,7 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[152]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[51]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">respuesta</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
@@ -14779,7 +14929,7 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[152]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[51]:</div>
 
 
 
@@ -14797,7 +14947,7 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 </div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[153]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[52]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">respuesta</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">]),</span><span class="nb">type</span><span class="p">(</span><span class="n">respuesta</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
@@ -14816,7 +14966,7 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[153]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[52]:</div>
 
 
 
@@ -14834,7 +14984,7 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 </div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[154]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[53]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -14856,7 +15006,7 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[154]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[53]:</div>
 
 
 
@@ -14958,7 +15108,7 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 </div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[155]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[54]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()}</span>
@@ -14979,7 +15129,7 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[155]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[54]:</div>
 
 
 
@@ -14997,7 +15147,7 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[156]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[55]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">respuesta</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
@@ -15016,7 +15166,7 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[156]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[55]:</div>
 
 
 
@@ -15045,7 +15195,7 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 </div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[150]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[56]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">respuesta</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">]),</span><span class="nb">type</span><span class="p">(</span><span class="n">respuesta</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span><span class="nb">type</span><span class="p">(</span><span class="n">respuesta</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
@@ -15064,7 +15214,7 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[150]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[56]:</div>
 
 
 
@@ -15079,7 +15229,15 @@ $$ x =  (x_0,x_1,x_2,...,x_n) $$$$ f(x) = a \cdot sen(b \cdot x ) $$<ul>
 
 </div>
 
-</div></div></section></section>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Links">Links<a class="anchor-link" href="#Links">&#182;</a></h2><h3 id="setear-flask-en-una-vm:">setear flask en una vm:<a class="anchor-link" href="#setear-flask-en-una-vm:">&#182;</a></h3><p><a href="https://developer.oracle.com/oracle-cloud-infrastructure/compute-vm-simple-tutorial/">https://developer.oracle.com/oracle-cloud-infrastructure/compute-vm-simple-tutorial/</a>
+<a href="https://docs.oracle.com/es-ww/iaas/developer-tutorials/tutorials/flask-on-ubuntu/01oci-ubuntu-flask-summary.html">https://docs.oracle.com/es-ww/iaas/developer-tutorials/tutorials/flask-on-ubuntu/01oci-ubuntu-flask-summary.html</a></p>
+<h3 id="instalar-conda-en-oracle-linux-7">instalar conda en oracle linux 7<a class="anchor-link" href="#instalar-conda-en-oracle-linux-7">&#182;</a></h3><p><a href="https://deeplearning.lipingyang.org/2018/12/24/install-miniconda-on-centos-7-redhat-7/">https://deeplearning.lipingyang.org/2018/12/24/install-miniconda-on-centos-7-redhat-7/</a></p>
+
+</div>
+</div></section></section>
 </div>
 </div>
 </body>

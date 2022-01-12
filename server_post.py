@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+import numpy as np
 app = Flask('Predictor de examenes')
 #aclaramos la ruta del recurso y el tipo: (podriamos poner /modelos/listener)
 @app.route('/',methods=['POST'])
@@ -8,7 +9,7 @@ def predict():
     # obtengo los datos del request post.
     # notar que en este contexto request contiene la informacion 
     # que viene de la peticion externa (el metodo get_json lo transforma en un diccionario)
-    data = request.get_json(force=True)
+    data = request.get_json()
     try:
         a_vector = np.array(data['a']).astype('int')
         # Le damos forma de un diccionario para poder hacer el traspaso a json trivialmente

@@ -1,31 +1,43 @@
 import streamlit as st
 import pandas as pd 
 import numpy as np
-import matplotlib.pyplot as plt
-from bokeh.plotting import figure
+import plotly.express as px
+import requests as req
 
-# widget de latex
-st.latex('f(x) = a\sin( \omega  x)')
+paises = st.multiselect(
+     'Paises a visualizar:',
+     ['AR', 'BR', 'CL', 'UY','BO','ES','FR','DE','PT','US','GB'])
 
-# widget input numerica
-a = st.number_input('Insert a',1)
 
 # texto
-st.write('a = ', a)
+option = st.selectbox(
+     'Que datos desea visualizar?',
+     ('casos_100k','muertes_100k','casos','muertes'))
 
-#widget de sliders
-b = st.slider('w', 0, 10, 1)
-n = st.slider('n', 0, 500, 25) 
 
-# python 
-x=np.linspace(0,10,int(n))
-y=a*np.sin(b*x)
-p = figure(
-     title='plot',
-     x_axis_label='x',
-     y_axis_label='y')
-p.line(x, y, legend_label='sin(x)', line_width=2)
-p.circle(x, y, legend_label='sin(x)', line_width=2)
+tipo=option
 
-#widget de bokeh
-st.bokeh_chart(p, use_container_width=True)
+if st.button('plot'):
+     fig = px.line(title=tipo)
+     for pais in paises:
+          r=req.get('http://corona-api.com/countries/' + pais)
+          t=[]
+          casos=[]
+          muertes=[]
+          data=r.json()
+          for day in data['data']['timeline']:
+                    t.append(day['date'])
+                    casos.append(day['new_confirmed'])
+                    muertes.append(day['new_deaths'])
+          df=pd.DataFrame()
+          df.index=pd.to_datetime(t)
+          df['casos']=casos
+          df['muertes']=muertes
+          pop=data['data']['population']/100000
+          df['casos_100k']=np.array(casos)/pop
+          df['muertes_100k']=np.array(muertes)/pop
+          fig.add_scatter(x=df.index, y=df[tipo],name=pais,mode='markers+lines') 
+
+     st.plotly_chart(fig)
+else:
+     pass
