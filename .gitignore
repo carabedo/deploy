@@ -1,0 +1,5 @@
+
+.DS_Store
+*.ipynb
+*.ipynb
+.ipynb_checkpoints/deploy_carabedo-checkpoint.ipynb

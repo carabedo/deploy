@@ -22,7 +22,7 @@ if st.button('plot'):
      for pais in paises:
           r=req.get('http://corona-api.com/countries/' + pais)
           t=[]
-          casos=[]
+          casos=[]/Users/fernando/gits/deploy/server_get_plotly.py
           muertes=[]
           data=r.json()
           for day in data['data']['timeline']:
