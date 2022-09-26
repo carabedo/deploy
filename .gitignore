@@ -3,3 +3,4 @@
 *.ipynb
 *.ipynb
 .ipynb_checkpoints/deploy_carabedo-checkpoint.ipynb
+.ipynb_checkpoints/deploy_carabedo-checkpoint.ipynb
